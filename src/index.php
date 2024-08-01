@@ -4,8 +4,8 @@ require 'loteria.php';
 require 'bilhete.php';
 
 $loteria = new Loteria();
-$bilhetesPremiados = $loteria->geraBillhetesPremiados();
-echo "Bilhetes Premiados: " . implode(', ', $bilhetesPremiados) . "</br>";
+$bilhetesPremiados = $loteria->geraBillhetePremiado();
+echo "Bilhete Premiado: " . implode(', ', $bilhetesPremiados) . "</br>";
 
 $quantidadeBilhete = 10; 
 $quantidadeNumeros = 6; 

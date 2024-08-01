@@ -2,15 +2,25 @@
 
 class Loteria
 {
-    public function geraBillhetesPremiados($qtdLimite = null)
+    private $qtdDezenasBilhetePremiado;
+
+    public function __construct()
+    {
+        $this->qtdDezenasBilhetePremiado = 6;
+    }
+
+    private function geraBillhetesAleatorios($qtdLimite)
     {
         $numeros = range(1, 60);
         shuffle($numeros);
-        if ($qtdLimite == null) {
-            $qtdLimite = 6;
-        }
         $bilhete = array_slice($numeros, 0, $qtdLimite);
         sort($bilhete);
+        return $bilhete;
+    }
+
+    public function geraBillhetePremiado()
+    {        
+        $bilhete = $this->geraBillhetesAleatorios($this->qtdDezenasBilhetePremiado);        
         return $bilhete;
     }
 
@@ -26,7 +36,7 @@ class Loteria
 
         $bilhetes = [];
         for ($i = 0; $i < $quantidadeBilhetes; $i++) {            
-            $ticket = $this->geraBillhetesPremiados($quantidadeDezenas);
+            $ticket = $this->geraBillhetesAleatorios($quantidadeDezenas);
             $bilhetes[] = $ticket;
         }
 
@@ -35,10 +45,10 @@ class Loteria
 
     public function verificaBilhetes($bilhetesPremiados, $bilhetes)
     {
-        $resultado = "<table border='1'><tr><th>Ticket</th><th>Matching Numbers</th></tr>";
+        $resultado = "<table border='1'><tr><th>Bilhetes</th><th>Números premiados</th></tr>";
         foreach ($bilhetes as $bilhete) {
-            $partidas = array_intersect($bilhetesPremiados, $bilhete);
-            $resultado .= "<tr><td>" . implode(', ', $bilhete) . "</td><td>" . implode(', ', $partidas) . "</td></tr>";
+            $numerosPremiados = array_intersect($bilhetesPremiados, $bilhete);
+            $resultado .= "<tr><td>" . implode(', ', $bilhete) . "</td><td>" . implode(', ', $numerosPremiados) . "</td></tr>";
         }
         $resultado .= "</table>";
         return $resultado;
