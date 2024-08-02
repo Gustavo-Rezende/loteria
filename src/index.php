@@ -1,6 +1,7 @@
 <?php
 
-require 'loteria.php';
+require 'Loteria.php';
+use App\Loteria;
 
 header('Content-Type: application/json');
 
