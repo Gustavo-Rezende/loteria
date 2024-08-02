@@ -40,49 +40,37 @@ Siga estas etapas para instalar e configurar o projeto em sua máquina local.
 
 1. **Clone o repositório:**
     ```bash
-    git clone https://github.com/usuario/repositorio.git
+    git clone https://github.com/Gustavo-Rezende/loteria.git
     ```
 
 2. **Navegue até o diretório do projeto:**
     ```bash
-    cd repositorio
+    cd loteria
     ```
 
-3. **Instale as dependências:**
+3. **Insira o comando para buildar o Docker do projeto:**
     ```bash
-    npm install
+    docker-compose up --build
     ```
 
-4. **Configure as variáveis de ambiente:**
-    Crie um arquivo `.env` na raiz do projeto e adicione as seguintes variáveis:
-    ```
-    DATABASE_URL=your_database_url
-    API_KEY=your_api_key
-    ```
-
-5. **Inicie o servidor:**
+4. **Rodar o projeto na porta 8000 como está configurado no docker-compose:**
     ```bash
-    npm start
+    localhost:8000
     ```
 
 ## Uso
 
-Aqui estão alguns exemplos de como usar o projeto:
+Via postman, criar uma requisição POST e no Body enviar um Json com os seguintes parâmetros:
 
-- **Criar uma nova tarefa:**
+- **Parâmetros Json:**
     ```bash
-    curl -X POST http://localhost:3000/tasks -d '{"title":"Nova Tarefa","dueDate":"2024-08-01"}' -H "Content-Type: application/json"
+    {
+        "quantidade_dezenas":6,
+        "quantidade_bilhetes":10
+    }
     ```
 
-- **Listar todas as tarefas:**
-    ```bash
-    curl http://localhost:3000/tasks
-    ```
-
-- **Marcar uma tarefa como concluída:**
-    ```bash
-    curl -X PATCH http://localhost:3000/tasks/1 -d '{"completed":true}' -H "Content-Type: application/json"
-    ```
+Altere os valores conforme desejar.
 
 
 ## Testes
@@ -90,4 +78,5 @@ Aqui estão alguns exemplos de como usar o projeto:
 Para rodar os testes, execute o seguinte comando:
 
 ```bash
-npm test
+./vendor/bin/phpunit --bootstrap vendor/autoload.php tests/LoteriaTest.php
+```
